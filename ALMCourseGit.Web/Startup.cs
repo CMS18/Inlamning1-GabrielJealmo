@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using ALMCourseGit.Web.Database;
+using ALMCourseGit.Web.Database.Entities;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
@@ -59,6 +61,36 @@ namespace ALMCourseGit.Web
                     name: "default",
                     template: "{controller=Home}/{action=Index}/{id?}");
             });
+            var customers = CreateCustomers();
+            BankRepository.AddCustomers(customers);
+        }
+        public List<Customer> CreateCustomers()
+        {
+            var customers = new List<Customer>() {
+                CreateCustomer(1, "Stefan"),
+                CreateCustomer(2, "Bengt"),
+                CreateCustomer(3, "Per"),
+                CreateCustomer(4, "Kalle")
+            };
+            return customers;
+        }
+
+        private Customer CreateCustomer(int id, string name)
+        {
+            var customer = new Customer()
+            {
+                CustomerId = id,
+                Name = name,
+                Accounts = new List<Account>()
+                {
+                    new Account()
+                    {
+                        AccountId = id,
+                        Balance = 5000.0M
+                    }
+                }
+            };
+            return customer;
         }
     }
 }

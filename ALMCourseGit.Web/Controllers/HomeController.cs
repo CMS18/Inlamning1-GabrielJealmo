@@ -5,6 +5,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using ALMCourseGit.Web.Models;
+using ALMCourseGit.Web.Database;
 
 namespace ALMCourseGit.Web.Controllers
 {
@@ -12,7 +13,8 @@ namespace ALMCourseGit.Web.Controllers
     {
         public IActionResult Index()
         {
-            return View();
+            var model = BankRepository.GetCustomers();
+            return View(model);
         }
 
         public IActionResult Privacy()

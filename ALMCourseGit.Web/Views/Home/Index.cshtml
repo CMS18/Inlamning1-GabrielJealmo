@@ -1,8 +1,28 @@
-﻿@{
+﻿@model List<ALMCourseGit.Web.Database.Entities.Customer>
+
+@{
     ViewData["Title"] = "Home Page";
 }
 
 <div class="text-center">
     <h1 class="display-4">Welcome to Gabriels Bank</h1>
     <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+    <ul class="text-center" style="list-style: none;">
+        @foreach(var customer in Model)
+        {
+            <li class="card">
+                <h3>Customer ID: @customer.CustomerId</h3>
+                <p>Customer name: @customer.Name</p>
+                <ul class="text-center" style="list-style: none;">
+                    @foreach(var account in customer.Accounts)
+                    {
+                        <li>
+                            <h5>Account ID: @account.AccountId</h5>
+                            <p>Balance: @account.Balance</p>
+                        </li>
+                    }
+                </ul>
+            </li>
+        }
+    </ul>
 </div>
