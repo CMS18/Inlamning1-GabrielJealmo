@@ -26,7 +26,7 @@ namespace ALMCourseGit.Web.Controllers
                 TempData["Status"] = BankRepository.Withdraw(model.Id.ToString(), model.Amount.ToString());
                 return View("Index");
             }
-            TempData["Status"] = "One or more fields are empty.";
+            TempData["Status"] = "Please fill out every field with valid numbers.";
             return RedirectToAction("Index");
         }
 
@@ -39,7 +39,7 @@ namespace ALMCourseGit.Web.Controllers
                 TempData["Status"] = BankRepository.Deposit(model.Id.ToString(), model.Amount.ToString());
                 return View("Index");
             }
-            TempData["Status"] = "One or more fields are empty.";
+            TempData["Status"] = "Please fill out every field with valid numbers.";
             return RedirectToAction("Index");
         }
     }
