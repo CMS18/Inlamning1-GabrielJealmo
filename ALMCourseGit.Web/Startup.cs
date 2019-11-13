@@ -63,6 +63,15 @@ namespace ALMCourseGit.Web
             });
             var customers = CreateCustomers();
             BankRepository.AddCustomers(customers);
+            var allaccounts = new List<Account>();
+            foreach(var customer in customers)
+            {
+                foreach(var account in customer.Accounts)
+                {
+                    allaccounts.Add(account);
+                }
+            }
+            BankRepository.AddAccounts(allaccounts);
         }
         public List<Customer> CreateCustomers()
         {

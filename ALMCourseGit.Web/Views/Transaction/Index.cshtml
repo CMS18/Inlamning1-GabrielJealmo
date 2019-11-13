@@ -1,0 +1,45 @@
+﻿<div class="container-fluid">
+    <div class="text-center">
+        <p>@TempData["Status"]</p>
+    </div>
+    <div class="row">
+        <form class="col" asp-controller="Transaction" asp-action="Withdraw">
+            <div class="row">
+                <div class="input-group">
+                    <label>
+                        Account ID
+                        <input type="number" name="id" />
+                    </label>
+                </div>
+            </div>
+            <div class="row">
+                <div class="input-group">
+                    <label>
+                        Amount
+                        <input type="number" name="amount" />
+                    </label>
+                </div>
+            </div>
+            <button type="submit">Withdraw</button>
+        </form>
+        <form class="col" asp-controller="Transaction" asp-action="Deposit">
+            <div class="row">
+                <div class="input-group">
+                    <label>
+                        Account ID
+                        <input type="number" name="id" />
+                    </label>
+                </div>
+            </div>
+            <div class="row">
+                <div class="input-group">
+                    <label>
+                        Amount
+                        <input type="number" name="amount" />
+                    </label>
+                </div>
+            </div>
+            <button type="submit">Deposit</button>
+        </form>
+    </div>
+</div>
