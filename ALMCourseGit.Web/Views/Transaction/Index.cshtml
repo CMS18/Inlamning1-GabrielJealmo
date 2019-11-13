@@ -1,4 +1,6 @@
-﻿<div class="container-fluid">
+﻿@model ALMCourseGit.Web.ViewModels.TransactionViewModel
+
+<div class="container-fluid">
     <div class="text-center">
         <p>@TempData["Status"]</p>
     </div>
@@ -8,7 +10,7 @@
                 <div class="input-group">
                     <label>
                         Account ID
-                        <input type="number" name="id" />
+                        <input asp-for="WithdrawModel.Id" type="number" name="id" />
                     </label>
                 </div>
             </div>
@@ -16,10 +18,11 @@
                 <div class="input-group">
                     <label>
                         Amount
-                        <input type="number" name="amount" />
+                        <input asp-for="WithdrawModel.Amount" type="number" name="amount" />
                     </label>
                 </div>
             </div>
+            
             <button type="submit">Withdraw</button>
         </form>
         <form class="col" asp-controller="Transaction" asp-action="Deposit">
@@ -27,7 +30,7 @@
                 <div class="input-group">
                     <label>
                         Account ID
-                        <input type="number" name="id" />
+                        <input asp-for="DepositModel.Id" type="number" name="id" />
                     </label>
                 </div>
             </div>
@@ -35,7 +38,7 @@
                 <div class="input-group">
                     <label>
                         Amount
-                        <input type="number" name="amount" />
+                        <input asp-for="DepositModel.Amount" type="number" name="amount" />
                     </label>
                 </div>
             </div>

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using ALMCourseGit.Web.Database;
+using ALMCourseGit.Web.ViewModels;
 using Microsoft.AspNetCore.Mvc;
 
 // For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
@@ -13,23 +14,33 @@ namespace ALMCourseGit.Web.Controllers
     {
         public IActionResult Index()
         {
-            return View();
+            return View(new TransactionViewModel());
         }
 
         [HttpPost]
         [AutoValidateAntiforgeryToken]
-        public IActionResult Withdraw(string id, string amount)
+        public IActionResult Withdraw(WithdrawModel model)
         {
-            TempData["Status"] = BankRepository.Withdraw(id, amount);
-            return View("Index");
+            if (ModelState.IsValid)
+            {
+                TempData["Status"] = BankRepository.Withdraw(model.Id.ToString(), model.Amount.ToString());
+                return View("Index");
+            }
+            TempData["Status"] = "One or more fields are empty.";
+            return RedirectToAction("Index");
         }
 
         [HttpPost]
         [AutoValidateAntiforgeryToken]
-        public IActionResult Deposit(string id, string amount)
+        public IActionResult Deposit(DepositModel model)
         {
-            TempData["Status"] = BankRepository.Deposit(id, amount);
-            return View("Index");
+            if (ModelState.IsValid)
+            {
+                TempData["Status"] = BankRepository.Deposit(model.Id.ToString(), model.Amount.ToString());
+                return View("Index");
+            }
+            TempData["Status"] = "One or more fields are empty.";
+            return RedirectToAction("Index");
         }
     }
 }
