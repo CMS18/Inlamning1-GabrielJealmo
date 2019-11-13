@@ -28,12 +28,14 @@ namespace ALMCourseGit.Tests
         {
             var account = Customer.Accounts.First();
             var depositAmount = "500";
-            var expectedReturn = "The selected amount has been deposited to account:" + account.AccountId + ".";
+            var expectedReturn = "The selected amount " + depositAmount + " has been deposited to account: " + account.AccountId;
             var expectedBalance = 5500M;
 
             BankRepository.AddAccounts(Customer.Accounts);
 
             var result = BankRepository.Deposit(account.AccountId.ToString(), depositAmount);
+
+            expectedReturn += ". Current balance: " + account.Balance + ".";
 
             Assert.Equal(result, expectedReturn);
             Assert.Equal(account.Balance, expectedBalance);
