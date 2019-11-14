@@ -1,0 +1,41 @@
+﻿@model ALMCourseGit.Web.ViewModels.TransferViewModel
+
+<div class="container-fluid">
+    <div class="text-center">
+        <p>@TempData["Status"]</p>
+    </div>
+    <div class="row">
+        <form class="col" asp-controller="Transfer" asp-action="Index" method="post">
+            <div class="row">
+                <div class="input-group">
+                    <label>
+                        From Account
+                        <input asp-for="SenderAccountId"/>
+                    </label>
+                </div>
+            </div>
+            <div class="row">
+                <div class="input-group">
+                    <label>
+                        To Account
+                        <input asp-for="ReceiverAccountId"/>
+                    </label>
+                </div>
+            </div>
+            
+            <div class="row">
+                <div class="input-group">
+                    <label>
+                        Amount
+                        <input asp-for="Amount"/>
+                    </label>
+                </div>
+            </div>
+
+            <button type="submit">Transfer</button>
+        </form>
+    </div>
+    
+    <div asp-validation-summary="All">
+    </div>
+</div>

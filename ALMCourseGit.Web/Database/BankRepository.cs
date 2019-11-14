@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.CodeAnalysis.CSharp.Syntax;
 
 namespace ALMCourseGit.Web.Database
 {
@@ -43,7 +44,7 @@ namespace ALMCourseGit.Web.Database
                         {
                             if (account.AccountId == accountId)
                             {
-                                if (account.Balance > withdrawAmount)
+                                if (account.Balance >= withdrawAmount)
                                 {
                                     account.Balance -= withdrawAmount;
                                     return "The selected amount " + withdrawAmount + " has been withdrawn from account: " + account.AccountId + ". Current balance: " + account.Balance + ".";
@@ -84,6 +85,39 @@ namespace ALMCourseGit.Web.Database
                 return "Id must be a number greater than 0.";
             }
             return "Please enter valid Id and amount.";
+        }
+
+        public static string Transfer(int senderId, int receiverId, decimal amount)
+        {
+            string msg = "Something went wrong. Please check that given account numbers are correct.";
+
+            var accountSender = GetAccounts().FirstOrDefault(m => m.AccountId == senderId);
+            var accountReceiver = GetAccounts().FirstOrDefault(m => m.AccountId == receiverId);
+
+            if (accountSender != null && accountReceiver != null)
+            {
+                if (amount <= 0)
+                {
+                    msg = "You can't transfer a negative amount";
+                }
+
+                else if (amount > accountSender.Balance)
+                {
+                    msg = "You have insufficient founds";
+                }
+
+                else
+                {
+                    accountSender.Balance = accountSender.Balance - amount;
+                    accountReceiver.Balance = accountReceiver.Balance + amount;
+
+                    msg = $"Successfully transferred {amount} from account {accountSender.AccountId}. " +
+                                  $"Current balance on accounts: {accountSender.AccountId} = {accountSender.Balance}. " +
+                                  $"{accountReceiver.AccountId} = {accountReceiver.Balance}";
+                }
+            }
+
+            return msg;
         }
     }
 }
